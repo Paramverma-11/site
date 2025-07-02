@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Virtual Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .listening {
+            animation: pulse 1.5s infinite;
+        }
+        .terminal-font {
+            font-family: 'Courier New', monospace;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg h-screen flex flex-col">
+    <div class="container mx-auto px-4 py-8 max-w-4xl flex-grow flex flex-col">
+        <header class="flex items-center justify-between mb-8">
+            <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                    <img src="https://placehold.co/48" alt="Circular AI assistant logo with glowing blue center" class="rounded-full">
+                </div>
+                <h1 class="text-3xl font-bold text-white">JARVIS</h1>
+            </div>
+            <div class="text-gray-300 text-sm">
+                <p id="datetime" class="text-right"></p>
+                <p id="connection-status" class="flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span>
+                    <span>Online</span>
+                </p>
+            </div>
+        </header>
+
+        <div id="assistant-container" class="flex-grow bg-gray-900 bg-opacity-50 rounded-lg p-6 flex flex-col">
+            <div id="conversation" class="flex-grow overflow-y-auto mb-6 space-y-4 max-h-96">
+                <div class="bg-blue-900 bg-opacity-30 rounded-lg p-4 w-3/4">
+                    <p class="text-blue-200 terminal-font">Initializing JARVIS system...</p>
+                </div>
+                <div class="bg-blue-900 bg-opacity-30 rounded-lg p-4 w-3/4">
+                    <p class="text-blue-200 terminal-font">Voice recognition protocols active</p>
+                </div>
+                <div class="bg-blue-900 bg-opacity-30 rounded-lg p-4 w-3/4">
+                    <p class="text-blue-200 terminal-font">Hello, I'm JARVIS. How may I assist you today?</p>
+                </div>
+            </div>
+
+            <div id="input-section" class="flex items-center">
+                <button id="mic-button" class="mr-4 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </button>
+                <input type="text" id="text-input" class="flex-grow bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your command or click the mic to speak...">
+                <button id="send-button" class="ml-4 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="status-bar" class="mt-4 text-gray-400 text-sm flex justify-between items-center">
+            <div class="flex items-center">
+                <div id="mic-status" class="flex items-center mr-6">
+                    <span class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>
+                    <span>Microphone: Ready</span>
+                </div>
+                <div id="voice-status" class="flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-red-500 mr-2"></span>
+                    <span>Speech: Disabled</span>
+                </div>
+            </div>
+            <div>
+                <span id="voice-feedback">Click microphone and speak clearly</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const conversation = document.getElementById('conversation');
+        const micButton = document.getElementById('mic-button');
+        const sendButton = document.getElementById('send-button');
+        const textInput = document.getElementById('text-input');
+        const micStatus = document.getElementById('mic-status');
+        const voiceStatus = document.getElementById('voice-status');
+        const voiceFeedback = document.getElementById('voice-feedback');
+        const datetimeElement = document.getElementById('datetime');
+
+        // Update datetime
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            datetimeElement.textContent = now.toLocaleDateString('en-US', options);
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 60000);
+
+        // Check if browser supports speech recognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            micStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-red-500 mr-2';
+            micStatus.querySelector('span + span').textContent = 'Microphone: Not Supported';
+            voiceFeedback.textContent = 'Speech recognition not supported in this browser. Try Chrome or Edge.';
+            micButton.disabled = true;
+        }
+
+        let recognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            micButton.addEventListener('click', () => {
+                if (micButton.classList.contains('listening')) {
+                    stopListening();
+                } else {
+                    startListening();
+                }
+            });
+
+            recognition.onstart = () => {
+                micButton.classList.add('listening');
+                micStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-green-500 mr-2';
+                micStatus.querySelector('span + span').textContent = 'Microphone: Listening';
+                voiceFeedback.textContent = 'Listening... Speak now';
+            };
+
+            recognition.onend = () => {
+                if (micButton.classList.contains('listening')) {
+                    stopListening();
+                }
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = Array.from(event.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+
+                textInput.value = transcript;
+
+                if (event.results[0].isFinal) {
+                    processCommand(transcript);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                stopListening();
+                voiceFeedback.textContent = 'Error: ' + event.error;
+                console.error('Speech recognition error', event.error);
+            };
+        }
+
+        function startListening() {
+            try {
+                recognition.start();
+            } catch (e) {
+                voiceFeedback.textContent = 'Error starting microphone: ' + e.message;
+                console.error(e);
+            }
+        }
+
+        function stopListening() {
+            micButton.classList.remove('listening');
+            micStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-yellow-500 mr-2';
+            micStatus.querySelector('span + span').textContent = 'Microphone: Ready';
+            if (recognition && recognition.running) {
+                recognition.stop();
+            }
+        }
+
+        // Normal text input
+        sendButton.addEventListener('click', () => {
+            if (textInput.value.trim()) {
+                processCommand(textInput.value);
+                textInput.value = '';
+            }
+        });
+
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && textInput.value.trim()) {
+                processCommand(textInput.value);
+                textInput.value = '';
+            }
+        });
+
+        // Process commands
+        function processCommand(command) {
+            if (!command.trim()) return;
+
+            // Add user message to conversation
+            addMessage('user', command);
+
+            // Process command and generate response
+            const response = generateResponse(command.toLowerCase());
+            
+            // Add JARVIS response with delay for typing effect
+            setTimeout(() => {
+                addMessage('jarvis', response);
+                speak(response);
+            }, 500);
+        }
+
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `rounded-lg p-4 max-w-3/4 ${sender === 'jarvis' ? 'bg-blue-900 bg-opacity-30 ml-auto ' : 'bg-gray-700 bg-opacity-70 mr-auto'}`;
+            
+            const messageContent = document.createElement('p');
+            messageContent.className = `${sender === 'jarvis' ? 'text-blue-200' : 'text-white'} terminal-font`;
+            messageContent.textContent = message;
+            
+            messageDiv.appendChild(messageContent);
+            conversation.appendChild(messageDiv);
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+
+        function generateResponse(command) {
+            // Basic command processing
+            if (command.includes('hello') || command.includes('hi') || command.includes('hey')) {
+                return "Hello there! How can I assist you today?";
+            } else if (command.includes('how are you')) {
+                return "I'm functioning optimally, thank you for asking. What can I do for you?";
+            } else if (command.includes('time')) {
+                const now = new Date();
+                const options = { hour: '2-digit', minute: '2-digit' };
+                return `The current time is ${now.toLocaleTimeString('en-US', options)}`;
+            } else if (command.includes('date')) {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return `Today is ${now.toLocaleDateString('en-US', options)}`;
+            } else if (command.includes('thank')) {
+                return "You're welcome. Is there anything else you need?";
+            } else if (command.includes('weather')) {
+                return "I'm currently unable to access real-time weather data. Would you like me to search the web for weather information?";
+            } else if (command.includes('search') || command.includes('google') || command.includes('find')) {
+                return "I can certainly help with that. I'll need web access to perform searches.";
+            } else if (command.includes('open') || command.includes('launch')) {
+                if (command.includes('chrome') || command.includes('browser')) {
+                    return "Attempting to launch web browser...";
+                } else if (command.includes('calendar')) {
+                    return "Opening calendar application...";
+                } else {
+                    return "I can't directly open applications on your system from the browser. Would you like me to guide you through the process?";
+                }
+            } else if (command.includes('play') && command.includes('music')) {
+                return "I can't directly access your music library. Would you like me to suggest streaming options?";
+            } else if (command.includes('who are you')) {
+                return "I am JARVIS, your virtual assistant. I'm here to help with tasks, answer questions, and make your computing experience more efficient.";
+            } else if (command.includes('goodbye') || command.includes('bye')) {
+                return "Goodbye. If you need assistance in the future, don't hesitate to call on me.";
+            } else {
+                return "I'm not sure I understand that command. Could you rephrase or ask something else?";
+            }
+        }
+
+        // Text to speech
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                voiceStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-green-500 mr-2';
+                voiceStatus.querySelector('span + span').textContent = 'Speech: Active';
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.voice = getBestVoice();
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                utterance.onend = () => {
+                    voiceStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-red-500 mr-2';
+                    voiceStatus.querySelector('span + span').textContent = 'Speech: Disabled';
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                voiceStatus.querySelector('span').className = 'w-2 h-2 rounded-full bg-red-500 mr-2';
+                voiceStatus.querySelector('span + span').textContent = 'Speech: Unavailable';
+                alert('Text-to-speech not supported in this browser.');
+            }
+        }
+
+        function getBestVoice() {
+            const voices = window.speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Microsoft David Desktop - English (United States)',
+                'Google US English',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const name of preferredVoices) {
+                const voice = voices.find(v => v.name === name);
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang === 'en-US') || voices[0];
+        }
+
+        // Ensure voices are loaded
+        if (speechSynthesis) {
+            speechSynthesis.onvoiceschanged = () => {};
+            speechSynthesis.getVoices(); // This forces voices to load
+        }
+    </script>
+</body>
+</html>
