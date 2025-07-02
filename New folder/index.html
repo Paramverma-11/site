@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>developer</title>
+    <link rel="stylesheet" href="port.css">
+    <link rel="stylesheet" href="chat.css">
+    <a href="chat.html"></a>
+</head>
+
+<body>
+    <section class="home">
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="logo">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24">
+                        <path d=""/>
+                    </svg>
+                </div>
+                <span class="logo-text">ｱ</span>
+            </div>
+
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="education.html">Education</a>
+                <a href="project.html">Project</a>
+                <a href="community.html">Community</a>
+                <a href="Contact.html">Contact</a>
+            </div>
+
+            <div class="nav-buttons">
+                <a href=""><button class="btn btn-outline">Download Cv</button></a>
+                <a href="Contact.html"><button class="btn btn-primary">Lets Make's Deal</button></a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hi, I Am <span class="highlight">PARAM</span> </h1>
+                <p>PARAM VERMA</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">About Me</button>
+                    <button class="btn btn-outline">Join Community</button>
+                </div>
+            </div>
+
+            <div class="code-background" id="codeBackground"></div>
+        </section>
+
+        <!-- about section -->
+        <section class="features" id="features">
+            <div class="section-title">
+                <h2>About Me <span class="highlight"></span></h2>
+                <p></p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                        </svg>
+                    </div>
+                    <h3>Experience</h3>
+                    <p>1+ year</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h2v5H7zm4-7h2v12h-2zm4 5h2v7h-2z" />
+                        </svg>
+                    </div>
+                    <h3>Analytics Dashboard</h3><a href="analy.html">
+                        <p>Track My coding progress with detailed statistics</p>
+                    </a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3V8z" />
+                        </svg>
+                    </div>
+                  <a href="project.html"> <h3>Projects</h3></a>
+                    <p>0</p>
+                </div>
+            </div>
+
+            <!-- Chat launcher button -->
+            <div class="chat-launcher" id="chatLauncher">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+
+            <!-- Chat container -->
+            <div class="chat-container hidden" id="chatContainer">
+                <div class="chat-header" id="chatHeader">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full mr-2 overflow-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24"
+                                height="24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                            </svg>
+                        </div>
+                        <h3>AI Assistant</h3>
+                    </div>
+                    <button id="minimizeChat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="assistant-bubble chat-bubble">
+                        Hello! I'm your AI assistant. How can I help you today?
+                        <div class="message-timestamp">Just now</div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <textarea class="chat-input" id="chatInput" placeholder="Type your message..." rows="1"></textarea>
+                    <button class="send-button" id="sendButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const chatLauncher = document.getElementById('chatLauncher');
+                    const chatContainer = document.getElementById('chatContainer');
+                    const chatHeader = document.getElementById('chatHeader');
+                    const minimizeChat = document.getElementById('minimizeChat');
+                    const chatMessages = document.getElementById('chatMessages');
+                    const chatInput = document.getElementById('chatInput');
+                    const sendButton = document.getElementById('sendButton');
+
+                    // Toggle chat visibility
+                    chatLauncher.addEventListener('click', function () {
+                        chatContainer.classList.toggle('hidden');
+                    });
+
+                    chatHeader.addEventListener('click', function () {
+                        chatContainer.classList.toggle('hidden');
+                    });
+
+                    minimizeChat.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        chatContainer.classList.add('hidden');
+                    });
+
+                    // Auto-resize textarea
+                    chatInput.addEventListener('input', function () {
+                        this.style.height = 'auto';
+                        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+                    });
+
+                    // Send message on Enter (but allow Shift+Enter for new lines)
+                    chatInput.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            sendMessage();
+                        }
+                    });
+
+                    // Send button click handler
+                    sendButton.addEventListener('click', sendMessage);
+
+                    function sendMessage() {
+                        const message = chatInput.value.trim();
+                        if (message) {
+                            // Add user message to chat
+                            addMessage(message, 'user');
+                            chatInput.value = '';
+                            chatInput.style.height = 'auto';
+
+                            // Show typing indicator
+                            const typingId = showTypingIndicator();
+
+                            // Simulate AI response (in a real app, this would be an API call)
+                            setTimeout(() => {
+                                hideTypingIndicator(typingId);
+
+                                const responses = [
+                                    "hi.Hello! How can I help you today?",
+                                    "hello. Hi there! What can I do for you?",
+                                    "how are you. I'm just a bot, but I'm doing great!",
+                                    "what is ai. AI stands for Artificial Intelligence. It simulates human intelligence in machines.",
+                                    "bye. Goodbye! Have a great day!",
+                                    "tell me a joke. Why did the computer go to therapy? It had a hard drive.",
+                                    "what is your name. I'm your friendly chatbot!",
+                                    "help. Sure! You can ask me about AI, tech, jokes, or just chat.",
+                                    "thank you.You're welcome!",
+                                    "who made you.I was created by developers using JavaScript."
+                            ];
+
+                                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                                addMessage(randomResponse, 'assistant');
+
+                                // Scroll to bottom
+                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                            }, 1500);
+                        }
+                    }
+
+                    function addMessage(text, sender) {
+                        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                        const bubbleDiv = document.createElement('div');
+                        bubbleDiv.className = `${sender}-bubble chat-bubble`;
+                        bubbleDiv.innerHTML = `
+                    ${text}
+                    <div class="message-timestamp">${timestamp}</div>
+                    <button class="copy-button" onclick="navigator.clipboard.writeText('${text.replace(/'/g, "\\'")}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                        </svg>
+                    </button>
+                `;
+
+                        chatMessages.appendChild(bubbleDiv);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }
+
+                    function showTypingIndicator() {
+                        const id = 'typing-' + Date.now();
+                        const typingDiv = document.createElement('div');
+                        typingDiv.id = id;
+                        typingDiv.className = 'assistant-bubble chat-bubble';
+                        typingDiv.innerHTML = `
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+
+                        chatMessages.appendChild(typingDiv);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        return id;
+                    }
+
+                    function hideTypingIndicator(id) {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.remove();
+                        }
+                    }
+
+                    // Initial scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                });
+            </script>
+        </section>
+
+
+        <footer>
+            <div class="logo">
+                <!-- <div class="logo-icon"> -->
+                <!-- <svg viewBox="0 0 24 24"> -->
+                <!-- <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/> -->
+                </svg>
+            </div>
+            <span class="logo-text"></span>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Features</a>
+                <a href="Contact.html">Contact</a>
+                <!-- <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a> -->
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/param-verma-0ab186361/" class="social-link">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+            </div>
+
+            <p class="copyright">© Param Verma All rights reserved.</p>
+        </footer>
+
+        <script>
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+
+            let currentIndex = 0;
+
+            function cycleCode() {
+                codeBackground.textContent = codeExamples[currentIndex];
+                currentIndex = (currentIndex + 1) % codeExamples.length;
+            }
+
+            cycleCode();
+            setInterval(cycleCode, 5000);
+
+            // Copy code button functionality
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const codeBlock = this.parentElement.nextElementSibling;
+                    const range = document.createRange();
+                    range.selectNode(codeBlock);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(range);
+
+                    try {
+                        document.execCommand('copy');
+                        const originalText = this.textContent;
+                        this.textContent = 'Copied!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Unable to copy code');
+                    }
+
+                    window.getSelection().removeAllRanges();
+                });
+            });
+        </script>
+</body>
+
+</html>
